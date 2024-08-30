@@ -1,0 +1,77 @@
+<div style="padding: 20px">
+  <!-- Form Section -->
+  <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
+    <mat-tab label="Investičná Kalkulačka">
+      <form [formGroup]="investForm" (ngSubmit)="calculateInvestment()">
+        <div class="form-group">
+          <mat-form-field appearance="fill">
+            <mat-label>Mesačne chcem investovať</mat-label>
+            <input
+              matInput
+              type="number"
+              formControlName="monthlyInvestment"
+              placeholder="50 €"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Doba</mat-label>
+            <mat-select formControlName="years">
+              <mat-option *ngFor="let year of yearsArray" [value]="year">
+                {{ year }} rokov
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Očakávaný ročný výnos</mat-label>
+            <input
+              matInput
+              type="number"
+              formControlName="expectedReturn"
+              placeholder="5.00 %"
+            />
+          </mat-form-field>
+        </div>
+
+        <button mat-raised-button color="primary" type="submit">
+          Vypočítať
+        </button>
+      </form>
+
+      <!-- Results Section -->
+      <div style="margin-top: 30px">
+        <h2>Výsledok</h2>
+        <p>hodnota vašej investície na konci</p>
+
+        <div class="results">
+          <div class="result-item">
+            <span>Suma vkladov</span>
+            <span class="value">{{
+              totalInvested | currency : "EUR" : "symbol" : "1.2-2"
+            }}</span>
+          </div>
+          <div class="result-item">
+            <span>Hodnota investície na konci</span>
+            <span class="value">{{
+              finalValue | currency : "EUR" : "symbol" : "1.2-2"
+            }}</span>
+          </div>
+        </div>
+
+        <!-- Chart Section -->
+        <ngx-charts-line-chart
+          [view]="[700, 400]"
+          [scheme]="colorScheme"
+          [results]="chartData"
+          [xAxis]="true"
+          [yAxis]="true"
+          [legend]="true"
+          [showXAxisLabel]="true"
+          [showYAxisLabel]="true"
+          [xAxisLabel]="'Roky'"
+          [yAxisLabel]="'Hodnota investície'"
+        >
+        </ngx-charts-line-chart>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
