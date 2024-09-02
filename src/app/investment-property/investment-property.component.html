@@ -1,0 +1,45 @@
+<form [formGroup]="propertyForm" (ngSubmit)="calculatePropertyInvestment()">
+  <div class="form-group">
+    <mat-form-field appearance="fill">
+      <mat-label>Property Price</mat-label>
+      <input
+        matInput
+        type="number"
+        formControlName="propertyPrice"
+        placeholder="80000 €"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Monthly Rental Income</mat-label>
+      <input
+        matInput
+        type="number"
+        formControlName="monthlyIncome"
+        placeholder="500 €"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Monthly Expenses</mat-label>
+      <input
+        matInput
+        type="number"
+        formControlName="monthlyExpenses"
+        placeholder="250 €"
+      />
+    </mat-form-field>
+  </div>
+
+  <button mat-raised-button color="primary" type="submit">Calculate</button>
+</form>
+
+<!-- Results Section -->
+<div style="margin-top: 30px">
+  <h2>Result</h2>
+  <p>Net Annual Return (%):</p>
+
+  <div class="results">
+    <div class="result-item">
+      <span>{{ netAnnualReturn.toFixed(2) }} %</span>
+    </div>
+  </div>
+</div>
