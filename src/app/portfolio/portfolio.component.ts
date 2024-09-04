@@ -1,16 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { StockService } from '../services/stock.service';
+import { Color, NgxChartsModule, ScaleType } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-portfolio',
   standalone: true,
-  imports: [MatTableModule, CommonModule],
+  imports: [MatTableModule, CommonModule, NgxChartsModule],
   templateUrl: './portfolio.component.html',
-  styleUrl: './portfolio.component.scss',
+  styleUrls: ['./portfolio.component.scss'],
 })
-export class PortfolioComponent {
+export class PortfolioComponent implements OnInit {
   private stockService = inject(StockService);
 
   displayedColumns: string[] = [
@@ -27,9 +28,11 @@ export class PortfolioComponent {
     'fiftyTwoWeekLow',
     'volume',
   ];
+
   portfolioData = [
     {
       instrument: 'BABA',
+      stock: 'BABA_IB',
       currentPrice: 0,
       position: 140,
       marketValue: 0,
@@ -44,6 +47,7 @@ export class PortfolioComponent {
     },
     {
       instrument: 'VWCE.DE',
+      stock: 'VWCE_IB',
       currentPrice: 0,
       position: 31,
       marketValue: 0,
@@ -58,6 +62,7 @@ export class PortfolioComponent {
     },
     {
       instrument: 'KWEB.L',
+      stock: 'KWEB_IB',
       currentPrice: 0,
       position: 200,
       marketValue: 0,
@@ -72,6 +77,7 @@ export class PortfolioComponent {
     },
     {
       instrument: 'BABA',
+      stock: 'BABA_ETORO',
       currentPrice: 0,
       position: 120,
       marketValue: 0,
@@ -89,6 +95,16 @@ export class PortfolioComponent {
   totalMarketValue: number = 0;
   totalUnrealizedPL: number = 0;
   totalPercentagePL: number = 0;
+
+  // Pie chart data
+  pieChartData: any[] = [];
+
+  colorScheme: Color = {
+    name: 'custom',
+    selectable: true,
+    group: ScaleType.Ordinal,
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'],
+  };
 
   ngOnInit(): void {
     this.loadStockData();
@@ -122,6 +138,7 @@ export class PortfolioComponent {
         },
         complete: () => {
           this.calculateTotals();
+          this.loadPieChartData();
         },
       });
     });
@@ -145,5 +162,20 @@ export class PortfolioComponent {
 
     // Calculate total percentage P/L based on total cost and total unrealized P/L
     this.totalPercentagePL = (this.totalUnrealizedPL / totalCost) * 100;
+  }
+
+  loadPieChartData() {
+    // Reset pie chart data
+    this.pieChartData = [];
+
+    // Create pie chart data based on marketValue
+    this.portfolioData.forEach((stock) => {
+      if (stock.marketValue > 0) {
+        this.pieChartData.push({
+          name: stock.stock,
+          value: stock.marketValue,
+        });
+      }
+    });
   }
 }
