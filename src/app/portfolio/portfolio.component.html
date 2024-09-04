@@ -11,6 +11,13 @@
     <td mat-cell *matCellDef="let element">{{ element.position }}</td>
   </ng-container>
 
+  <ng-container matColumnDef="currentPrice">
+    <th mat-header-cell *matHeaderCellDef>CURRECT PRICE</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.currentPrice | currency }}
+    </td>
+  </ng-container>
+
   <!-- Market Value Column -->
   <ng-container matColumnDef="marketValue">
     <th mat-header-cell *matHeaderCellDef>MARKET VALUE</th>
@@ -42,11 +49,86 @@
     </td>
   </ng-container>
 
+  <ng-container matColumnDef="percentagePL">
+    <th mat-header-cell *matHeaderCellDef>UNREALIZED %</th>
+    <td
+      mat-cell
+      *matCellDef="let element"
+      [ngClass]="{
+        positive: element.percentagePL > 0,
+        negative: element.percentagePL < 0
+      }"
+    >
+      {{ element.percentagePL | number : "1.2-2" }}%
+    </td>
+  </ng-container>
+
+  <!-- Regular Market Day High Column -->
+  <ng-container matColumnDef="regularMarketDayHigh">
+    <th mat-header-cell *matHeaderCellDef>DAY HIGH</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.regularMarketDayHigh | currency }}
+    </td>
+  </ng-container>
+
+  <!-- Regular Market Day Low Column -->
+  <ng-container matColumnDef="regularMarketDayLow">
+    <th mat-header-cell *matHeaderCellDef>DAY LOW</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.regularMarketDayLow | currency }}
+    </td>
+  </ng-container>
+
+  <!-- 52-Week High Column -->
+  <ng-container matColumnDef="fiftyTwoWeekHigh">
+    <th mat-header-cell *matHeaderCellDef>52-WEEK HIGH</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.fiftyTwoWeekHigh | currency }}
+    </td>
+  </ng-container>
+
+  <!-- 52-Week Low Column -->
+  <ng-container matColumnDef="fiftyTwoWeekLow">
+    <th mat-header-cell *matHeaderCellDef>52-WEEK LOW</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.fiftyTwoWeekLow | currency }}
+    </td>
+  </ng-container>
+
+  <!-- Volume Column -->
+  <ng-container matColumnDef="volume">
+    <th mat-header-cell *matHeaderCellDef>VOLUME</th>
+    <td mat-cell *matCellDef="let element">{{ element.volume }}</td>
+  </ng-container>
+
+  <!-- Header and Row Definitions -->
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
 
+<!-- Totals Section -->
 <div class="totals">
   <p>Total Market Value: {{ totalMarketValue | currency }}</p>
-  <p>Total Unrealized P&L: {{ totalUnrealizedPL | currency }}</p>
+  <p>
+    Total Unrealized P&L:
+    <span
+      [ngClass]="{
+        positive: totalUnrealizedPL > 0,
+        negative: totalUnrealizedPL < 0
+      }"
+    >
+      {{ totalUnrealizedPL | currency }}
+    </span>
+  </p>
+  <p>
+    Total Unrealized %:
+    <span
+      [ngClass]="{
+        positive: totalPercentagePL > 0,
+        negative: totalPercentagePL < 0
+      }"
+    >
+      {{ totalPercentagePL | number : "1.2-2" }}%
+    </span>
+  </p>
 </div>
