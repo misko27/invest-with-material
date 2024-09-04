@@ -1,0 +1,52 @@
+<table mat-table [dataSource]="portfolioData" class="mat-elevation-z8">
+  <!-- Instrument Column -->
+  <ng-container matColumnDef="instrument">
+    <th mat-header-cell *matHeaderCellDef>INSTRUMENT</th>
+    <td mat-cell *matCellDef="let element">{{ element.instrument }}</td>
+  </ng-container>
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef>POSITION</th>
+    <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+  </ng-container>
+
+  <!-- Market Value Column -->
+  <ng-container matColumnDef="marketValue">
+    <th mat-header-cell *matHeaderCellDef>MARKET VALUE</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.marketValue | currency }}
+    </td>
+  </ng-container>
+
+  <!-- Average Price Column -->
+  <ng-container matColumnDef="avgPrice">
+    <th mat-header-cell *matHeaderCellDef>AVG PRICE</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.avgPrice | currency }}
+    </td>
+  </ng-container>
+
+  <!-- Unrealized P&L Column -->
+  <ng-container matColumnDef="unrealizedPL">
+    <th mat-header-cell *matHeaderCellDef>UNREALIZED P&L</th>
+    <td
+      mat-cell
+      *matCellDef="let element"
+      [ngClass]="{
+        positive: element.unrealizedPL > 0,
+        negative: element.unrealizedPL < 0
+      }"
+    >
+      {{ element.unrealizedPL | currency }}
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+
+<div class="totals">
+  <p>Total Market Value: {{ totalMarketValue | currency }}</p>
+  <p>Total Unrealized P&L: {{ totalUnrealizedPL | currency }}</p>
+</div>

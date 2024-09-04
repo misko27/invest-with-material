@@ -4,7 +4,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
-import { Color, NgxChartsModule, ScaleType } from '@swimlane/ngx-charts';
 import {
   FormBuilder,
   FormControl,
@@ -21,7 +20,6 @@ import {
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
-    NgxChartsModule,
     ReactiveFormsModule,
   ],
   templateUrl: './investment-property.component.html',
