@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
-import { StockService } from '../services/stock.service';
 import { Color, NgxChartsModule, ScaleType } from '@swimlane/ngx-charts';
+import { StockService } from '../../services/stock.service';
 
 @Component({
   selector: 'app-portfolio',
