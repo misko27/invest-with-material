@@ -1,4 +1,17 @@
 <div style="padding: 20px">
+  <!-- Sign Out Section -->
+  <div
+    style="
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    "
+  >
+    <span>Welcome, {{ userEmail }}</span>
+    <button mat-raised-button color="warn" (click)="logout()">Sign Out</button>
+  </div>
+
   <!-- Form Section -->
   <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
     <mat-tab label="Portfolio">
