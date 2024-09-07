@@ -1,10 +1,14 @@
 <div class="login-container">
   <mat-card>
     <mat-card-header>
-      <mat-card-title>Login</mat-card-title>
+      <mat-card-title>{{ isSignupMode ? "Sign Up" : "Login" }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <form [formGroup]="loginForm" (ngSubmit)="login()" autocomplete="off">
+      <form
+        [formGroup]="loginForm"
+        (ngSubmit)="isSignupMode ? signup() : login()"
+        autocomplete="off"
+      >
         <mat-form-field appearance="fill">
           <mat-label>Email</mat-label>
           <input
@@ -12,6 +16,7 @@
             formControlName="email"
             placeholder="Enter your email"
             type="email"
+            autocomplete="off"
           />
           @if (loginForm.get('email')?.invalid &&
           loginForm.get('email')?.touched) {
@@ -25,7 +30,6 @@
             matInput
             formControlName="password"
             placeholder="Enter your password"
-            type="password"
             [type]="hidePassword ? 'password' : 'text'"
             autocomplete="new-password"
           />
@@ -38,7 +42,6 @@
             <mat-icon>{{
               hidePassword ? "visibility_off" : "visibility"
             }}</mat-icon>
-            <!-- Eye icon -->
           </button>
           @if (loginForm.get('password')?.invalid &&
           loginForm.get('password')?.touched) {
@@ -53,13 +56,23 @@
             type="submit"
             [disabled]="loginForm.invalid"
           >
-            Login
+            {{ isSignupMode ? "Sign Up" : "Login" }}
           </button>
         </div>
 
         @if (errorMessage) {
         <p class="error-message">{{ errorMessage }}</p>
         }
+
+        <!-- Toggle between login and signup -->
+        <p>
+          {{
+            isSignupMode ? "Already have an account?" : "Don't have an account?"
+          }}
+          <a href="javascript:void(0)" (click)="toggleMode()">
+            {{ isSignupMode ? "Login here" : "Sign up here" }}
+          </a>
+        </p>
       </form>
     </mat-card-content>
   </mat-card>

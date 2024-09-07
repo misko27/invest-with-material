@@ -4,6 +4,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   User,
+  createUserWithEmailAndPassword,
 } from '@angular/fire/auth';
 import { BehaviorSubject, from, Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
@@ -35,6 +36,10 @@ export class AuthService {
         this.router.navigate(['/login']);
       })
     );
+  }
+
+  signup(email: string, password: string): Observable<any> {
+    return from(createUserWithEmailAndPassword(this.auth, email, password));
   }
 
   // Check if the user is authenticated

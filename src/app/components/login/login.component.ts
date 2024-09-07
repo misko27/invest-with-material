@@ -42,6 +42,7 @@ export class LoginComponent {
   });
 
   hidePassword = true;
+  isSignupMode = false;
 
   login() {
     if (this.loginForm.valid) {
@@ -60,7 +61,29 @@ export class LoginComponent {
     }
   }
 
+  signup() {
+    if (this.loginForm.valid) {
+      const { email, password } = this.loginForm.value;
+
+      this.authService.signup(email, password).subscribe({
+        next: () => {
+          this.router.navigate(['/']);
+        },
+        error: (err) => {
+          this.errorMessage = 'Signup failed: ' + err.message;
+        },
+      });
+    } else {
+      this.errorMessage = 'Please fill out the form correctly.';
+    }
+  }
+
   togglePasswordVisibility() {
     this.hidePassword = !this.hidePassword;
+  }
+
+  toggleMode() {
+    this.isSignupMode = !this.isSignupMode;
+    this.errorMessage = ''; // Reset any error message when switching modes
   }
 }
