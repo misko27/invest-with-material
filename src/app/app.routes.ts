@@ -48,6 +48,7 @@ export const routes: Routes = [
       { path: 'portfolio', component: PortfolioComponent },
       { path: 'regular-invest', component: RegularInvestComponent },
       { path: 'investment-property', component: InvestmentPropertyComponent },
+      { path: '', redirectTo: 'regular-invest', pathMatch: 'full' },
     ],
   },
   {
