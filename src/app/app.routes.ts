@@ -10,6 +10,9 @@ import { LoginComponent } from './components/login/login.component';
 import { firstValueFrom } from 'rxjs';
 import { AuthService } from './services/auth.service';
 import { InvestCalcComponent } from './components/invest-calc/invest-calc.component';
+import { PortfolioComponent } from './components/portfolio/portfolio.component';
+import { RegularInvestComponent } from './components/regular-invest/regular-invest.component';
+import { InvestmentPropertyComponent } from './components/investment-property/investment-property.component';
 
 const isAuthenticated: CanActivateFn = async (
   route: ActivatedRouteSnapshot,
@@ -39,15 +42,20 @@ const isAuthenticated: CanActivateFn = async (
 export const routes: Routes = [
   {
     path: '',
-    component: InvestCalcComponent, // Main component, protected by isAuthenticated
-    canActivate: [isAuthenticated], // Protect this route with the auth guard
+    component: InvestCalcComponent,
+    canActivate: [isAuthenticated],
+    children: [
+      { path: 'portfolio', component: PortfolioComponent },
+      { path: 'regular-invest', component: RegularInvestComponent },
+      { path: 'investment-property', component: InvestmentPropertyComponent },
+    ],
   },
   {
     path: 'login',
-    component: LoginComponent, // Login route, accessible without authentication
+    component: LoginComponent,
   },
   {
     path: '**',
-    redirectTo: '', // Catch-all for unmatched routes
+    redirectTo: '', // Fallback to the default route
   },
 ];

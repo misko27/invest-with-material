@@ -1,27 +1,33 @@
-<div style="padding: 20px">
-  <!-- Sign Out Section -->
-  <div
-    style="
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    "
-  >
-    <span>Welcome, {{ userEmail }}</span>
-    <button mat-raised-button color="warn" (click)="logout()">Sign Out</button>
-  </div>
+<mat-sidenav-container class="sidenav-container" autosize>
+  <mat-sidenav #sidenav mode="side" opened>
+    <mat-nav-list>
+      <mat-list-item [routerLink]="['portfolio']">
+        <mat-icon>account_balance</mat-icon>
+        <span>Portfolio</span>
+      </mat-list-item>
+      <mat-list-item [routerLink]="['regular-invest']">
+        <mat-icon>calculate</mat-icon>
+        <span>Regular Investment</span>
+      </mat-list-item>
+      <mat-list-item [routerLink]="['investment-property']">
+        <mat-icon>home</mat-icon>
+        <span>Investment Property</span>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Main Application</span>
+      <span class="spacer"></span>
+      <span>{{ userEmail }}</span>
+      <button mat-raised-button color="warn" (click)="logout()">
+        Sign Out
+      </button>
+    </mat-toolbar>
 
-  <!-- Form Section -->
-  <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
-    <!-- <mat-tab label="Portfolio">
-      <app-portfolio></app-portfolio>
-    </mat-tab> -->
-    <mat-tab label="Investment Calculator">
-      <app-regular-invest> </app-regular-invest>
-    </mat-tab>
-    <mat-tab label="Investment Property">
-      <app-investment-property></app-investment-property>
-    </mat-tab>
-  </mat-tab-group>
-</div>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -4,8 +4,13 @@ import { RegularInvestComponent } from '../regular-invest/regular-invest.compone
 import { InvestmentPropertyComponent } from '../investment-property/investment-property.component';
 import { PortfolioComponent } from '../portfolio/portfolio.component';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+
 @Component({
   selector: 'app-invest-calc',
   standalone: true,
@@ -15,6 +20,11 @@ import { MatButtonModule } from '@angular/material/button';
     InvestmentPropertyComponent,
     PortfolioComponent,
     MatButtonModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatListModule,
+    RouterModule,
   ],
   templateUrl: './invest-calc.component.html',
   styleUrl: './invest-calc.component.scss',

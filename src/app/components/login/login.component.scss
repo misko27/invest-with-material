@@ -4,19 +4,88 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f0f0f0;
+  background: linear-gradient(to bottom right, #6a11cb, #2575fc);
+  padding: 20px;
 }
 
 mat-card {
   width: 400px;
   padding: 20px;
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+mat-card-title {
+  color: #3f51b5;
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-align: center;
 }
 
 mat-form-field {
   width: 100%;
+  margin-bottom: 20px;
+}
+
+mat-form-field .mat-form-field-label {
+  color: #6a11cb;
+}
+
+mat-form-field .mat-input-element {
+  color: #333;
+}
+
+mat-form-field .mat-focused .mat-form-field-label {
+  color: #3f51b5 !important;
+}
+
+mat-form-field .mat-focused .mat-form-field-underline {
+  background-color: #3f51b5;
+}
+
+button[mat-raised-button] {
+  background-color: #6a11cb;
+  color: white;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+button[mat-raised-button]:hover {
+  background-color: #75acd8;
+}
+
+.error-message {
+  color: #e53935;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
 }
 
 .login-actions {
   display: flex;
   justify-content: flex-end;
+}
+
+a {
+  color: #6a11cb;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
