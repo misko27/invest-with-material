@@ -18,7 +18,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '18.20.2' # Adjust to the version your project needs
+          node-version: '18.20.2' # Use Node.js 18.20.2 as specified
 
       - name: Install dependencies
         run: npm install
@@ -27,7 +27,7 @@ jobs:
         run: npm install -g @angular/cli
 
       - name: Build Angular app
-        run: ng build --prod
+        run: ng build --configuration production # Correct flag for Angular 18
 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
@@ -35,3 +35,4 @@ jobs:
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_CALC_HOSTING_ANG }}"
           channelId: live
           projectId: calc-hosting-ang
+
