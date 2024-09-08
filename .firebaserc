@@ -1,7 +1,7 @@
 {
   "projects": {
-    "default": "investing-app",
-    "investing-app": "investing-app-f87f1"
+    "default": "investing-app-f87f1",
+    "prod": "investing-app-f87f1"
   },
   "targets": {},
   "etags": {},
