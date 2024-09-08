@@ -18,7 +18,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '18.20.2' # Use Node.js 18.20.2 as specified
+          node-version: "18.20.2" # Use Node.js 18.20.2 as specified
 
       - name: Install dependencies
         run: npm install
@@ -34,5 +34,4 @@ jobs:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_CALC_HOSTING_ANG }}"
           channelId: live
-          projectId: calc-hosting-ang
-
+          projectId: investing-app

@@ -1,5 +1,9 @@
 {
   "projects": {
-    "default": "calc-hosting-ang"
-  }
+    "default": "investing-app",
+    "investing-app": "investing-app-f87f1"
+  },
+  "targets": {},
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
 }
