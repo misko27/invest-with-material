@@ -34,4 +34,4 @@ jobs:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_CALC_HOSTING_ANG }}"
           channelId: live
-          projectId: investing-app
+          projectId: investing-app-f87f1
