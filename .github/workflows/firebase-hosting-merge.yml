@@ -2,19 +2,36 @@
 # https://github.com/firebase/firebase-tools
 
 name: Deploy to Firebase Hosting on merge
+
 on:
   push:
     branches:
       - master
+
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
-      - run: npm run build
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.20.2' # Adjust to the version your project needs
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Angular CLI globally
+        run: npm install -g @angular/cli
+
+      - name: Build Angular app
+        run: ng build --prod
+
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CALC_HOSTING_ANG }}
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_CALC_HOSTING_ANG }}"
           channelId: live
           projectId: calc-hosting-ang
