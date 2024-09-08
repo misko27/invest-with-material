@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/invest-with-material",
+    "public": "dist/invest-with-material/browser",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
   }
 }
