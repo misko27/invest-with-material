@@ -1,10 +1,10 @@
 <mat-sidenav-container class="sidenav-container" autosize>
   <mat-sidenav #sidenav mode="side" opened>
     <mat-nav-list>
-      <!-- <mat-list-item [routerLink]="['portfolio']">
+      <mat-list-item [routerLink]="['portfolio']">
         <mat-icon>account_balance</mat-icon>
         <span>Portfolio</span>
-      </mat-list-item> -->
+      </mat-list-item>
       <mat-list-item [routerLink]="['regular-invest']">
         <mat-icon>calculate</mat-icon>
         <span>Regular Investment</span>
@@ -20,14 +20,13 @@
       <button mat-icon-button (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
-      <span>Main Application</span>
+      <span>Invest app</span>
       <span class="spacer"></span>
       <span>{{ userEmail }}</span>
       <button mat-raised-button color="warn" (click)="logout()">
         Sign Out
       </button>
     </mat-toolbar>
-
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
