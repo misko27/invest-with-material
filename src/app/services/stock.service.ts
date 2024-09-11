@@ -18,6 +18,7 @@ export class StockService {
     const yahooUrl = `${this.baseUrl}/v8/finance/chart/${symbol}`;
     return this.http.get<YahooFinanceResponse>(yahooUrl).pipe(
       map((data: YahooFinanceResponse) => {
+        console.log('API response:', data);
         const result = data.chart.result[0];
         const currentPrice = result.meta.regularMarketPrice;
         return {
