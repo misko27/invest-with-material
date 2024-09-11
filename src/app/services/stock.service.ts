@@ -16,10 +16,10 @@ export class StockService {
 
   getStockData(symbol: string): Observable<any> {
     const yahooUrl = `${this.baseUrl}/v8/finance/chart/${symbol}`;
+    console.log('API URL:', yahooUrl);
     return this.http.get<YahooFinanceResponse>(yahooUrl).pipe(
       map((data: YahooFinanceResponse) => {
         console.log('API response:', data); // Log incoming data
-        console.log('API URL:', yahooUrl);
 
         if (data?.chart?.result?.[0]) {
           const result = data.chart.result[0];
