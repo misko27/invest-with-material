@@ -18,22 +18,27 @@ export class StockService {
     const yahooUrl = `${this.baseUrl}/v8/finance/chart/${symbol}`;
     return this.http.get<YahooFinanceResponse>(yahooUrl).pipe(
       map((data: YahooFinanceResponse) => {
-        console.log('API response:', data);
-        const result = data.chart.result[0];
-        const currentPrice = result.meta.regularMarketPrice;
-        return {
-          symbol: result.meta.symbol,
-          currentPrice: currentPrice,
-          fiftyTwoWeekHigh: result.meta.fiftyTwoWeekHigh,
-          fiftyTwoWeekLow: result.meta.fiftyTwoWeekLow,
-          regularMarketDayHigh: result.meta.regularMarketDayHigh,
-          regularMarketDayLow: result.meta.regularMarketDayLow,
-          regularMarketVolume: result.meta.regularMarketVolume,
-          longName: result.meta.longName,
-        };
+        console.log('API response:', data); // Log incoming data
+        console.log('API URL:', yahooUrl);
+
+        if (data?.chart?.result?.[0]) {
+          const result = data.chart.result[0];
+          return {
+            symbol: result.meta.symbol,
+            currentPrice: result.meta.regularMarketPrice,
+            fiftyTwoWeekHigh: result.meta.fiftyTwoWeekHigh,
+            fiftyTwoWeekLow: result.meta.fiftyTwoWeekLow,
+            regularMarketDayHigh: result.meta.regularMarketDayHigh,
+            regularMarketDayLow: result.meta.regularMarketDayLow,
+            regularMarketVolume: result.meta.regularMarketVolume,
+            longName: result.meta.longName,
+          };
+        }
+        throw new Error('Invalid data structure');
       }),
       catchError((error) => {
         console.error(`Failed to fetch data for ${symbol}`, error);
+        console.log('Full error response:', error);
         return throwError(() => error);
       })
     );
